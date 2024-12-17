@@ -9,15 +9,15 @@ import kotlinx.coroutines.launch
 
 class WeatherViewModel : ViewModel() {
     private val _weatherData = MutableStateFlow<WeatherResponse?>(null)
-    val weatherData : StateFlow<WeatherResponse?> = _weatherData
+    val weatherData: StateFlow<WeatherResponse?> = _weatherData
     private val weatherApi = WeatherApi.create()
 
-    fun fetchWeather(city: String, apiKey:String ){
+    fun fetchWeather(city: String, apiKey: String) {
         viewModelScope.launch {
-            try{
+            try {
                 val response = weatherApi.getWeather(city, apiKey)
                 _weatherData.value = response
-            } catch (e:Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
